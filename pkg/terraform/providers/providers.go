@@ -23,6 +23,8 @@ var (
 	AzureStack = provider("azurestack")
 	// Google is the provider for creating resources in GCP.
 	Google = provider("google")
+	// GoogleBeta is the provider for creating resources in GCP.
+	GoogleBeta = provider("googlebeta")
 	// IBM is the provider for creating resources in IBM Cloud.
 	IBM = provider("ibm")
 	// Ignition is the provider for creating ignition config files.

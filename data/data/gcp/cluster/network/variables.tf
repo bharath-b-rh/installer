@@ -46,3 +46,9 @@ variable "network_project_id" {
   type        = string
   description = "The project that the network and subnets exist in when they are not in the main ProjectID."
 }
+
+variable "labels" {
+  type        = map(string)
+  description = "GCP labels to be applied to created resources."
+  default     = {}
+}

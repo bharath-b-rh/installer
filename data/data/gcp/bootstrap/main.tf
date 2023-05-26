@@ -17,6 +17,12 @@ provider "google" {
   region      = var.gcp_region
 }
 
+provider "googlebeta" {
+  credentials = var.gcp_service_account
+  project     = var.gcp_project_id
+  region      = var.gcp_region
+}
+
 resource "google_storage_bucket" "ignition" {
   name                        = "${var.cluster_id}-bootstrap-ignition"
   location                    = var.gcp_region
@@ -62,11 +68,15 @@ data "ignition_config" "redirect" {
 }
 
 resource "google_compute_address" "bootstrap" {
+  provider = googlebeta
+
   name        = "${var.cluster_id}-bootstrap-ip"
   description = local.description
 
   address_type = local.public_endpoints ? "EXTERNAL" : "INTERNAL"
   subnetwork   = local.public_endpoints ? null : var.master_subnet
+
+  labels = local.labels
 }
 
 resource "google_compute_firewall" "bootstrap_ingress_ssh" {

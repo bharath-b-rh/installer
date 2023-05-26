@@ -1,8 +1,9 @@
 resource "google_compute_address" "cluster_public_ip" {
+  provider    = googlebeta
   count       = var.public_endpoints ? 1 : 0
   description = local.description
-
-  name = "${var.cluster_id}-cluster-public-ip"
+  name        = "${var.cluster_id}-cluster-public-ip"
+  labels      = var.labels
 }
 
 // Refer to docs/dev/kube-apiserver-health-check.md on how to correctly setup health check probe for kube-apiserver

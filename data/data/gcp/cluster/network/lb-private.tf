@@ -1,8 +1,10 @@
 resource "google_compute_address" "cluster_ip" {
+  provider     = googlebeta
   name         = "${var.cluster_id}-cluster-ip"
   address_type = "INTERNAL"
   subnetwork   = local.master_subnet
   description  = local.description
+  labels       = var.labels
 }
 
 // Refer to docs/dev/kube-apiserver-health-check.md on how to correctly setup health check probe for kube-apiserver

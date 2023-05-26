@@ -20,6 +20,12 @@ provider "google" {
   region      = var.gcp_region
 }
 
+provider "googlebeta" {
+  credentials = var.gcp_service_account
+  project     = var.gcp_project_id
+  region      = var.gcp_region
+}
+
 module "master" {
   source = "./master"
 
@@ -69,6 +75,7 @@ module "network" {
   master_subnet       = var.gcp_control_plane_subnet
   worker_subnet       = var.gcp_compute_subnet
   network_project_id  = var.gcp_network_project_id
+  labels              = local.labels
 
   create_firewall_rules = var.gcp_create_firewall_rules
 }
