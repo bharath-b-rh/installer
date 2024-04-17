@@ -15,16 +15,6 @@ func GatedFeatures(c *types.InstallConfig) []featuregates.GatedInstallConfigFeat
 	g := c.GCP
 	return []featuregates.GatedInstallConfigFeature{
 		{
-			FeatureGateName: configv1.FeatureGateGCPLabelsTags,
-			Condition:       len(g.UserLabels) > 0,
-			Field:           field.NewPath("platform", "gcp", "userLabels"),
-		},
-		{
-			FeatureGateName: configv1.FeatureGateGCPLabelsTags,
-			Condition:       len(g.UserTags) > 0,
-			Field:           field.NewPath("platform", "gcp", "userTags"),
-		},
-		{
 			FeatureGateName: configv1.FeatureGateGCPClusterHostedDNS,
 			Condition:       g.UserProvisionedDNS == gcp.UserProvisionedDNSEnabled,
 			Field:           field.NewPath("platform", "gcp", "userProvisionedDNS"),
